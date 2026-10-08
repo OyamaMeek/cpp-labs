@@ -16,6 +16,7 @@ int main()
     //查看bool类型所占内存空间
     cout<<sizeof(flag)<<endl;
 
+
     return 0;
 
 }
