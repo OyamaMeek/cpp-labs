@@ -12,6 +12,7 @@ int main()
     cout<<str1<<endl;
 
     //c++风格字符串
+    //包含一个头文件#include <string>
     string str2="Hello World";
     cout<<str2<<endl;
 
