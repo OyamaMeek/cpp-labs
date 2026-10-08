@@ -25,6 +25,12 @@ int main()
     cout<<"Enter a word: ";
     cin>>c;
     cout<<c<<endl;
+    //字符串型输入
+    string s="hello world";
+    cout<<"Enter a string: ";
+    cin>>s;
+    cout<<s<<endl;
+
 
 
 
