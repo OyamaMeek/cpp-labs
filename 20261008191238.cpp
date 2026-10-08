@@ -15,6 +15,13 @@ int main()
     cout<<"Enter a number: ";
     cin>>a;
     cout<<a<<endl;
+    //浮点型输入
+    float b=3.14f;
+    cout<<"Enter a number: ";
+    cin>>b;
+    cout<<b<<endl;
+
+
 
 
 
