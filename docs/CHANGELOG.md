@@ -16,6 +16,6 @@
   - `memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`
   - `docs/CHANGELOG.md`
 
-- **Git 提交**：待提交。
+- **Git 提交**：`ff71c69 feat: solve HDOJ 1000 with EOF input`，已推送到 `origin/main`；此提交信息通过后续文档提交补记。
 
 ---
