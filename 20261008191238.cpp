@@ -20,6 +20,12 @@ int main()
     cout<<"Enter a number: ";
     cin>>b;
     cout<<b<<endl;
+    //字符型输入
+    char c='a';
+    cout<<"Enter a word: ";
+    cin>>c;
+    cout<<c<<endl;
+
 
 
 
