@@ -33,14 +33,20 @@ using namespace std;
 int main()
 {
    int a ;
-   int b ;
-   cin>>a;
-   cin>>b;
-   int sum=0;
-   for(int i=a; i<b+1; i++)
-   {
-      sum+=i;
-   }
-   cout<<sum<<endl;
+  // int b ;
+  // cin>>a;
+  // cin>>b;
+   //int sum=0;
+
+    while (cin>>a)
+    {
+        int sum=0;
+        for(int i=1; i<a+1; i++)
+        {
+            sum+=i;
+        }
+        cout<<sum<<endl;
+    }
+
 
 }
