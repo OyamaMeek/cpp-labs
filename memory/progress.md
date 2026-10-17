@@ -4,6 +4,6 @@
 - [x] 添加独立平方计算检查，覆盖输入、输出和退出码。
 - [x] 初次检查因目标文件没有声明或实现而编译失败；补全后 8 组检查通过，原有 HDOJ 1000 的 5 组检查通过，编译无警告，`git diff --check` 通过。
 - [x] 更新开发记录并检查提交范围；功能提交为 `25bd2db feat: complete integer square exercise`。
-- [ ] 普通推送至 `origin/main`；推送正在等待远端响应。
+- [x] 功能提交 `25bd2db` 已普通推送至 `origin/main`。
 
 保留用户已有 `.idea/editor.xml`、`C/character1/2.1`、`HDOJ/1001`；目标文件原先已暂存创建注释，本次仅暂存补充的实现。
