@@ -40,3 +40,24 @@
 - **Git 提交**：`25bd2db feat: complete integer square exercise`；此提交信息通过后续文档提交补记。
 
 ---
+
+## [2026-10-17 11:11] C 第一章 1.3.2：输出两个整数中的较小值
+
+- **需求/问题描述**：
+  > 根据题目图片第（3）题完成 `C/character1/1.3.2.c`，输入两个数后输出其中较小值。
+
+- **实际实现的功能与改动**：
+  - 沿用相邻练习的整数输入，使用 `if/else` 比较并输出较小值及换行；读取失败时返回 1。
+  - 添加实际编译与输入输出检查；初次因缺少实现而编译失败，实现后 11 组检查通过。
+  - 覆盖输入顺序、相等、负数、零、整数边界、空输入、缺少第二个整数及非数字输入；严格编译和 UndefinedBehaviorSanitizer 检查通过。
+  - 原有平方计算 8 组及 HDOJ 1000 的 5 组检查通过，`git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/character1/1.3.2.c`
+  - `tests/test_character1_1_3_2.py`
+  - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`
+  - `docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
