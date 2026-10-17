@@ -37,6 +37,6 @@
   - `memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`
   - `docs/CHANGELOG.md`
 
-- **Git 提交**：待提交。
+- **Git 提交**：`25bd2db feat: complete integer square exercise`；此提交信息通过后续文档提交补记。
 
 ---
