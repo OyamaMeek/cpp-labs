@@ -78,6 +78,6 @@
   - `memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`
   - `docs/CHANGELOG.md`
 
-- **Git 提交**：待提交。
+- **Git 提交**：`0cf5211 feat: solve HDU 2084 number tower`，已普通推送至 `origin/main`；此提交信息通过后续文档提交补记。
 
 ---
