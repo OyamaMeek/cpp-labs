@@ -61,3 +61,23 @@
 - **Git 提交**：`fcbb409 feat: complete smaller integer exercise`；此提交信息通过后续文档提交补记。
 
 ---
+
+## [2026-10-21 13:58] HDU 2084：数塔最大路径和
+
+- **需求/问题描述**：
+  > 根据用户提供的数塔图片完成 `HDOJ/HDU2084.cpp`。
+
+- **实际实现的功能与改动**：
+  - 使用自底向上动态规划计算最大路径和，处理多组数据；时间与空间复杂度均为 O(N²)。
+  - 检查读取结果及 1 至 100 层的数组边界，不完整或非法输入返回 1。
+  - 新增真实编译与运行测试；初次因缺少 `main()` 链接失败，实现后 16 组检查通过，图片数塔输出 59。
+  - `python3 -m pytest -q` 共 4 项通过，包含已有 24 组输入检查；严格编译、AddressSanitizer/UndefinedBehaviorSanitizer 和 `git diff --check` 通过。
+
+- **涉及文件**：
+  - `HDOJ/HDU2084.cpp`、`tests/test_hdu2084.py`
+  - `memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`
+  - `docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
