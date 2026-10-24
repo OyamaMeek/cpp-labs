@@ -10,6 +10,6 @@
 - [x] 改写提交 `772d615 refactor: use for loop for digit sum` 已普通推送到 `origin/main`；位数获取方法在回复中说明。
 - [x] 按用户最新要求将求和改回 `while` 循环。
 - [x] 改回后全部 5 项 pytest 通过，包含本题 10 组检查；严格编译、UndefinedBehaviorSanitizer 和 `git diff --check` 通过。
-- [ ] 提交并普通推送本次改动。
+- [x] 提交 `219d912 refactor: use while loop for digit sum` 已普通推送至 `origin/main`。
 
 保留用户已有三个测试文件的修改，以及 `.idea/editor.xml`、`C/character1/1.2`、`C/character1/1.3.2`、`C/character1/2.1`、`HDOJ/1001`。
