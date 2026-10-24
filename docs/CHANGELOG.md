@@ -100,3 +100,20 @@
 - **Git 提交**：`6c3b291 feat: calculate integer digit sum`，已普通推送至 `origin/main`；此提交信息通过后续文档提交补记。
 
 ---
+
+## [2026-10-24 10:32] 用 for 循环计算数字之和
+
+- **需求/问题描述**：
+  > 说明如何获取整数位数，将 `261024.c` 中的求和改用 `for` 循环。
+
+- **实际实现的功能与改动**：
+  - 将整除操作移到 `for` 更新表达式，保留输入校验和正负整数、零的求和结果。
+  - 位数计算通过回复中的整除计数示例说明，程序继续只输出数字之和。
+  - 修改前本题 10 组检查通过；修改后全部 5 项 pytest 通过，严格编译、UndefinedBehaviorSanitizer 和 `git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/character1/261024.c`、`memory/plan.md`、`memory/progress.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
