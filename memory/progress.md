@@ -7,6 +7,6 @@
 - [x] 功能提交 `6c3b291 feat: calculate integer digit sum` 已普通推送到 `origin/main`；后续文档提交补记交付结果。
 - [x] 按后续要求将求和改用 `for` 循环；修改前原有 10 组检查通过。
 - [x] 循环改写后全部 5 项 pytest 通过，包含本题 10 组检查；严格编译、UndefinedBehaviorSanitizer 和 `git diff --check` 通过。
-- [ ] 提交、推送本次改写；在回复中说明按整除计数获取位数的方法。
+- [x] 改写提交 `772d615 refactor: use for loop for digit sum` 已普通推送到 `origin/main`；位数获取方法在回复中说明。
 
 保留用户已有三个测试文件的修改，以及 `.idea/editor.xml`、`C/character1/1.2`、`C/character1/1.3.2`、`C/character1/2.1`、`HDOJ/1001`。
