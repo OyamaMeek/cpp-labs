@@ -117,3 +117,19 @@
 - **Git 提交**：`772d615 refactor: use for loop for digit sum`，已普通推送至 `origin/main`；此提交信息通过后续文档提交补记。
 
 ---
+
+## [2026-10-24 10:35] 使用 while 循环计算数字之和
+
+- **需求/问题描述**：
+  > 将 `261024.c` 改回 `while` 循环。
+
+- **实际实现的功能与改动**：
+  - 使用 `while (num != 0)`，在循环中累加末位并执行 `num /= 10`。
+  - 全部 5 项 pytest 通过，包含本题 10 组检查；严格编译、UndefinedBehaviorSanitizer 和 `git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/character1/261024.c`、`memory/plan.md`、`memory/progress.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
