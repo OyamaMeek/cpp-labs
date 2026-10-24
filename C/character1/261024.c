@@ -13,9 +13,11 @@ int main(void)
         sum += num % 10;
         num /= 10;
     }
+    //如果是负数，则取绝对值
     if (sum < 0) {
         sum = -sum;
     }
+
     printf("%d\n", sum);
     return 0;
 }
