@@ -81,3 +81,22 @@
 - **Git 提交**：`0cf5211 feat: solve HDU 2084 number tower`，已普通推送至 `origin/main`；此提交信息通过后续文档提交补记。
 
 ---
+
+## [2026-10-24 10:30] C 整数各位数字之和
+
+- **需求/问题描述**：
+  > 在 `C/character1/261024.c` 中输入一个整数，输出每一位数字的和。
+
+- **实际实现的功能与改动**：
+  - 使用取余和整除循环求和，支持零、负数和 `int` 边界；负号不参与求和，读取失败返回 1。
+  - 新增 10 组真实编译与运行检查，初次因缺少实现而编译失败；实现后 `python3 -m pytest -q` 共 5 项通过。
+  - 严格编译、UndefinedBehaviorSanitizer 和 `git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/character1/261024.c`、`tests/test_character1_261024.py`
+  - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`
+  - `docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
