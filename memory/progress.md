@@ -13,3 +13,10 @@
 - [x] 提交 `219d912 refactor: use while loop for digit sum` 已普通推送至 `origin/main`。
 
 保留用户已有三个测试文件的修改，以及 `.idea/editor.xml`、`C/character1/1.2`、`C/character1/1.3.2`、`C/character1/2.1`、`HDOJ/1001`。
+
+## 2026-10-29：将 a 的值存入字符串
+
+- [x] 在 `C/character4/section2/subsection3/test.c` 使用 `snprintf(name, sizeof name, "%d", a)` 替换固定字符串初始化；无外部调用、测试、配置或导出需要同步修改。
+- [x] 修改前严格编译因 `a` 未使用失败；修改后 C17 严格编译和 UndefinedBehaviorSanitizer 运行通过，输出 `2`，`git diff --check` 通过。
+- 保留 `name[5]`，最多保存 4 个字符及字符串结束符，满足当前 `a = 10`。
+- 未提交或推送：目标文件原先只有创建注释已暂存，程序主体属于用户未暂存内容；本次转换语句依赖该主体，无法独立提交可运行代码而不纳入用户改动。

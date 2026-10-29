@@ -133,3 +133,20 @@
 - **Git 提交**：`219d912 refactor: use while loop for digit sum`，已普通推送至 `origin/main`；此提交信息通过后续文档提交补记。
 
 ---
+
+## [2026-10-29 14:36] 将整数 a 转成字符串
+
+- **需求/问题描述**：
+  > 将 `a` 的值放入 `test.c` 中 `name` 的字符串位置。
+
+- **实际实现的功能与改动**：
+  - 使用 `snprintf(name, sizeof name, "%d", a)`，将当前整数 `10` 转成字符串 `"10"`；保留字符串长度输出。
+  - 修改前严格编译因 `a` 未使用失败；修改后 C17 严格编译、UndefinedBehaviorSanitizer 运行和 `git diff --check` 通过，程序输出 `2`。
+  - 保留 5 字节数组，最多保存 4 个字符及字符串结束符；未运行全仓库测试。
+
+- **涉及文件**：
+  - `C/character4/section2/subsection3/test.c`（+2 / -1）、`memory/progress.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：未提交或推送；转换语句依赖用户尚未暂存的程序主体，无法独立提交可运行代码而不纳入用户已有改动，保留原暂存状态。
+
+---
