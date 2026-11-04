@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>冒泡排序演示</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --text: #1d2330;
+    --muted: #6b7280;
+    --border: #e3e6eb;
+    --bar: #8aa4c8;
+    --compare: #f2a93b;
+    --swap: #e5534b;
+    --sorted: #3fa76b;
+    --accent: #3b6fd8;
+    --code-bg: #f3f4f7;
+    --code-hl: #fff1cc;
+    --tk-kw: #a626a4;
+    --tk-type: #c18401;
+    --tk-fn: #4078f2;
+    --tk-num: #986801;
+    --tk-str: #50a14f;
+    --tk-com: #a0a1a7;
+    --tk-pre: #e45649;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c;
+      --panel: #1c2027;
+      --text: #e6e8ec;
+      --muted: #9aa3b0;
+      --border: #2c323b;
+      --bar: #56708f;
+      --compare: #e3a13a;
+      --swap: #e0605a;
+      --sorted: #44b174;
+      --accent: #6b95f0;
+      --code-bg: #161a20;
+      --code-hl: #3a3220;
+      --tk-kw: #c678dd;
+      --tk-type: #e5c07b;
+      --tk-fn: #61afef;
+      --tk-num: #d19a66;
+      --tk-str: #98c379;
+      --tk-com: #7f848e;
+      --tk-pre: #e06c75;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 16px; align-items: start; }
+  @media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 0;
+  }
+  .card h2 { font-size: 13px; font-weight: 600; color: var(--muted); margin: 16px 0 8px; }
+  .card h2:first-child { margin-top: 0; }
+
+  .stage { position: relative; height: 340px; margin-bottom: 8px; }
+  .bar {
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    border-radius: 6px 6px 2px 2px;
+    background: var(--bar);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 4px;
+    transition-property: transform, background-color, height;
+    transition-timing-function: ease-in-out;
+  }
+  .bar.cmp { background: var(--compare); }
+  .bar.swp { background: var(--swap); }
+  .bar.done { background: var(--sorted); }
+  .bar .ptr {
+    position: absolute;
+    bottom: -24px;
+    color: var(--accent);
+    font: 700 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+    white-space: nowrap;
+  }
+  .baseline {
+    position: absolute; left: 0; right: 0; bottom: 25px;
+    height: 1px; background: var(--border);
+  }
+
+  .status {
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: var(--bg);
+    font-size: 15px;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .legend span::before {
+    content: ""; display: inline-block; width: 12px; height: 12px;
+    border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--c);
+  }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; align-items: center; }
+  button {
+    font: inherit; font-size: 14px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .45; cursor: default; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; min-width: 84px; }
+
+  .sliders { display: grid; grid-template-columns: auto 1fr auto; gap: 8px 12px; align-items: center; margin-top: 16px; font-size: 14px; }
+  .sliders output { color: var(--muted); min-width: 48px; text-align: right; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+
+  .custom { display: flex; gap: 8px; margin-top: 12px; }
+  .custom input {
+    flex: 1; min-width: 0;
+    font: inherit; font-size: 14px;
+    padding: 7px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+  }
+
+  .progress { height: 4px; background: var(--border); border-radius: 2px; margin-top: 12px; overflow: hidden; }
+  .progress i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .15s; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat { background: var(--bg); border-radius: 8px; padding: 8px 10px; }
+  .stat b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+  .stat small { color: var(--muted); font-size: 12px; }
+
+  .mono { font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  .code {
+    margin: 0;
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 8px 0;
+    overflow-x: auto;
+  }
+  .code .ln {
+    display: flex;
+    border-left: 3px solid transparent;
+    white-space: pre;
+    min-width: max-content;
+  }
+  .code .ln.hl { background: var(--code-hl); border-left-color: var(--compare); }
+  .code .no {
+    flex: none;
+    width: 34px;
+    padding-right: 12px;
+    text-align: right;
+    color: var(--muted);
+    opacity: .6;
+    user-select: none;
+  }
+  .code .src { padding-right: 16px; }
+  .tk-kw { color: var(--tk-kw); }
+  .tk-type { color: var(--tk-type); }
+  .tk-fn { color: var(--tk-fn); }
+  .tk-num { color: var(--tk-num); }
+  .tk-str { color: var(--tk-str); }
+  .tk-com { color: var(--tk-com); font-style: italic; }
+  .tk-pre { color: var(--tk-pre); }
+
+  .vars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .var {
+    display: flex; justify-content: space-between; gap: 8px;
+    background: var(--bg); border-radius: 6px; padding: 4px 10px;
+    transition: background-color .2s;
+  }
+  .var span { color: var(--muted); }
+  .var b { font-weight: 600; }
+  .var.changed { background: var(--code-hl); }
+
+  .console {
+    margin: 0;
+    background: #1e2229;
+    color: #d7dae0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .console .prompt { color: #7f848e; }
+
+  .hint { color: var(--muted); font-size: 12px; margin-top: 12px; }
+  kbd { font: 11px ui-monospace, Menlo, monospace; border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>冒泡排序 · C++ 动画演示</h1>
+  <p class="sub">每一轮从左到右比较相邻元素，较大的元素向右“冒泡”，一轮结束后当前最大的元素到达最终位置。右侧 C++ 代码会随每一步高亮正在执行的语句。</p>
+
+  <div class="layout">
+    <div class="card">
+      <div class="stage" id="stage"><div class="baseline"></div></div>
+      <div class="status" id="status"></div>
+      <div class="progress"><i id="progress"></i></div>
+
+      <div class="legend">
+        <span style="--c: var(--bar)">未排序</span>
+        <span style="--c: var(--compare)">正在比较</span>
+        <span style="--c: var(--swap)">交换</span>
+        <span style="--c: var(--sorted)">已归位</span>
+      </div>
+
+      <div class="controls">
+        <button class="primary" id="play">▶ 播放</button>
+        <button id="prev">⏮ 上一步</button>
+        <button id="next">下一步 ⏭</button>
+        <button id="reset">↺ 重置</button>
+        <button id="shuffle">🎲 随机数组</button>
+      </div>
+
+      <div class="sliders">
+        <label for="size">元素个数</label>
+        <input type="range" id="size" min="5" max="30" value="10">
+        <output id="sizeOut">10</output>
+
+        <label for="speed">播放速度</label>
+        <input type="range" id="speed" min="1" max="10" value="5">
+        <output id="speedOut">5</output>
+      </div>
+
+      <div class="custom">
+        <input id="customInput" placeholder="自定义数组（正整数），如：5, 3, 8, 1, 9, 2">
+        <button id="apply">使用</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>统计</h2>
+      <div class="stats">
+        <div class="stat"><small>轮次</small><b id="statPass">0</b></div>
+        <div class="stat"><small>比较</small><b id="statCmp">0</b></div>
+        <div class="stat"><small>交换</small><b id="statSwp">0</b></div>
+      </div>
+
+      <h2>C++ 代码</h2>
+      <div class="code mono" id="code"></div>
+
+      <h2>变量</h2>
+      <div class="vars mono" id="vars"></div>
+
+      <h2>程序输出</h2>
+      <pre class="console mono" id="console"></pre>
+
+      <div class="hint">快捷键：<kbd>空格</kbd> 播放/暂停　<kbd>←</kbd> <kbd>→</kbd> 单步</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CODE_TEMPLATE = [
+  '#include <iostream>',
+  '#include <vector>',
+  'using namespace std;',
+  '',
+  'void bubbleSort(vector<int>& a) {',
+  '    int n = a.size();',
+  '    for (int i = 0; i < n - 1; i++) {',
+  '        bool swapped = false;',
+  '        for (int j = 0; j < n - 1 - i; j++) {',
+  '            if (a[j] > a[j + 1]) {',
+  '                swap(a[j], a[j + 1]);',
+  '                swapped = true;',
+  '            }',
+  '        }',
+  '        // 本轮结束，a[n - 1 - i] 已归位',
+  '        if (!swapped) break;',
+  '    }',
+  '}',
+  '',
+  'int main() {',
+  '    vector<int> a = {__DATA__};',
+  '    bubbleSort(a);',
+  '    for (int x : a) cout << x << " ";',
+  '    return 0;',
+  '}',
+];
+
+// CODE_TEMPLATE 中各语句的行下标（从 0 开始）
+const L = {
+  init: 5, outer: 6, flag: 7, inner: 8, cond: 9, swap: 10, set: 11,
+  settle: 14, brk: 15, call: 21, print: 22,
+};
+
+const TOKEN = new RegExp([
+  '(\\/\\/.*$)',
+  '("(?:[^"\\\\]|\\\\.)*")',
+  '(#include\\s*&lt;\\w+&gt;)',
+  '\\b(void|int|bool|for|if|break|return|true|false|using|namespace)\\b',
+  '\\b(vector|cout|std)\\b',
+  '\\b(\\d+)\\b',
+  '\\b(\\w+)(?=\\()',
+].join('|'), 'g');
+const TOKEN_CLASS = ['tk-com', 'tk-str', 'tk-pre', 'tk-kw', 'tk-type', 'tk-num', 'tk-fn'];
+
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlightCpp(line) {
+  return escapeHtml(line).replace(TOKEN, (m, ...groups) => {
+    const k = groups.slice(0, TOKEN_CLASS.length).findIndex(g => g !== undefined);
+    return `<span class="${TOKEN_CLASS[k]}">${m}</span>`;
+  });
+}
+
+const $ = id => document.getElementById(id);
+const stage = $('stage');
+let items = [];   // { id, v, el }
+let steps = [];
+let cur = 0;
+let timer = null;
+let codeLines = [];
+
+// 预先生成全部步骤，支持前进与后退
+function buildSteps(list) {
+  const a = list.slice();
+  const n = a.length;
+  const out = [];
+  const sorted = new Set();
+  let cmp = 0, swp = 0, pass = 0;
+  let vi = null, vj = null, vs = null;
+  const push = s => out.push({
+    order: a.map(x => x.id), sorted: new Set(sorted),
+    cmp, swp, pass, i: vi, j: vj, swapped: vs, ...s,
+  });
+
+  push({ type: 'start', lines: [L.init], msg: `调用 bubbleSort(a)，n = ${n}。点击「播放」或「下一步」开始。` });
+  for (let i = 0; i < n - 1; i++) {
+    pass = i + 1;
+    vi = i; vj = null; vs = false;
+    push({ type: 'pass', lines: [L.outer, L.flag], msg: `第 ${pass} 轮（i = ${i}）：swapped 置为 false，j 从 0 比较到 ${n - 2 - i}。` });
+    for (let j = 0; j < n - 1 - i; j++) {
+      vj = j;
+      cmp++;
+      const gt = a[j].v > a[j + 1].v;
+      push({
+        type: 'compare', lines: [L.inner, L.cond],
+        msg: `比较 a[${j}] = ${a[j].v} 与 a[${j + 1}] = ${a[j + 1].v}：` + (gt ? `${a[j].v} > ${a[j + 1].v}，条件成立，需要交换。` : '条件不成立，不交换。'),
+      });
+      if (gt) {
+        [a[j], a[j + 1]] = [a[j + 1], a[j]];
+        swp++;
+        vs = true;
+        push({ type: 'swap', lines: [L.swap, L.set], msg: `swap(a[${j}], a[${j + 1}])：${a[j + 1].v} 向右移动一位，swapped = true。` });
+      }
+    }
+    vj = null;
+    sorted.add(a[n - 1 - i].id);
+    push({ type: 'settle', lines: [L.settle], msg: `第 ${pass} 轮结束，${a[n - 1 - i].v} 到达最终位置 a[${n - 1 - i}]。` });
+    if (!vs) {
+      a.forEach(x => sorted.add(x.id));
+      push({ type: 'early', lines: [L.brk], msg: '本轮没有发生交换，数组已经有序，执行 break 提前结束。' });
+      break;
+    }
+  }
+  a.forEach(x => sorted.add(x.id));
+  vi = null; vj = null;
+  push({
+    type: 'done', lines: [L.print],
+    output: a.map(x => x.v).join(' ') + ' ',
+    msg: `🎉 排序完成！共 ${pass} 轮，比较 ${cmp} 次，交换 ${swp} 次。`,
+  });
+  return out;
+}
+
+function buildCode(values) {
+  return CODE_TEMPLATE.map(line => highlightCpp(line.replace('__DATA__', values.join(', '))));
+}
+
+function setData(values) {
+  stop();
+  stage.querySelectorAll('.bar').forEach(b => b.remove());
+  items = values.map((v, id) => {
+    const el = document.createElement('div');
+    el.className = 'bar';
+    el.innerHTML = `<span class="val">${v}</span><span class="ptr"></span>`;
+    stage.appendChild(el);
+    return { id, v, el };
+  });
+  steps = buildSteps(items);
+  codeLines = buildCode(values);
+  cur = 0;
+  $('sizeOut').textContent = values.length;
+  layout();
+  render();
+}
+
+function randomValues(n) {
+  return Array.from({ length: n }, () => 5 + Math.floor(Math.random() * 95));
+}
+
+function delay() {
+  // 速度 1..10 对应 1200ms..80ms
+  const s = +$('speed').value;
+  return Math.round(1200 * Math.pow(0.74, s - 1));
+}
+
+function layout() {
+  const W = stage.clientWidth;
+  const H = stage.clientHeight - 32;
+  const n = items.length;
+  const slot = W / n;
+  const bw = Math.max(4, slot * 0.72);
+  const max = Math.max(...items.map(x => x.v));
+  items.forEach(it => {
+    it.el.style.width = bw + 'px';
+    it.el.style.height = Math.max(6, (it.v / max) * H) + 'px';
+    it.el.querySelector('.val').style.display = slot >= 22 ? '' : 'none';
+    it.slot = slot;
+    it.offset = (slot - bw) / 2;
+  });
+}
+
+function renderVars(st, prev) {
+  const byId = new Map(items.map(it => [it.id, it.v]));
+  const at = k => (st.j === null || k >= st.order.length) ? '—' : byId.get(st.order[k]);
+  const fmt = v => v === null ? '—' : String(v);
+  const vars = [
+    ['n', items.length],
+    ['i', fmt(st.i)],
+    ['j', fmt(st.j)],
+    ['swapped', fmt(st.swapped)],
+    ['a[j]', st.j === null ? '—' : at(st.j)],
+    ['a[j+1]', st.j === null ? '—' : at(st.j + 1)],
+  ];
+  const changed = name => prev && (
+    (name === 'i' && prev.i !== st.i) ||
+    (name === 'j' && prev.j !== st.j) ||
+    (name === 'swapped' && prev.swapped !== st.swapped));
+  $('vars').innerHTML = vars.map(([k, v]) =>
+    `<div class="var${changed(k) ? ' changed' : ''}"><span>${k}</span><b>${v}</b></div>`).join('');
+}
+
+function render() {
+  const st = steps[cur];
+  const dur = Math.min(450, delay() * 0.8);
+  const byId = new Map(items.map(it => [it.id, it]));
+
+  st.order.forEach((id, idx) => {
+    const it = byId.get(id);
+    const el = it.el;
+    el.style.transitionDuration = dur + 'ms';
+    el.style.transform = `translateX(${idx * it.slot + it.offset}px)`;
+    el.classList.remove('cmp', 'swp', 'done');
+    const ptr = el.querySelector('.ptr');
+    ptr.textContent = '';
+
+    if (st.sorted.has(id)) el.classList.add('done');
+    if ((st.type === 'compare' || st.type === 'swap') && (idx === st.j || idx === st.j + 1)) {
+      el.classList.remove('done');
+      el.classList.add(st.type === 'compare' ? 'cmp' : 'swp');
+      ptr.textContent = idx === st.j ? 'j' : 'j+1';
+    }
+  });
+
+  $('status').textContent = st.msg;
+  $('statPass').textContent = st.pass;
+  $('statCmp').textContent = st.cmp;
+  $('statSwp').textContent = st.swp;
+  $('progress').style.width = (cur / (steps.length - 1) * 100) + '%';
+
+  const hl = new Set(st.lines);
+  $('code').innerHTML = codeLines.map((html, i) =>
+    `<div class="ln${hl.has(i) ? ' hl' : ''}"><span class="no">${i + 1}</span><span class="src">${html || ' '}</span></div>`).join('');
+
+  renderVars(st, cur > 0 ? steps[cur - 1] : null);
+
+  $('console').innerHTML = st.type === 'done'
+    ? `<span class="prompt">$ ./bubble_sort</span>\n${escapeHtml(st.output)}`
+    : '<span class="prompt">（排序完成后显示 main 的输出）</span>';
+
+  $('prev').disabled = cur === 0;
+  $('next').disabled = cur === steps.length - 1;
+}
+
+function go(i) {
+  cur = Math.max(0, Math.min(steps.length - 1, i));
+  render();
+}
+
+function tick() {
+  if (cur >= steps.length - 1) { stop(); return; }
+  go(cur + 1);
+  timer = setTimeout(tick, delay());
+}
+
+function play() {
+  if (cur >= steps.length - 1) go(0);
+  $('play').textContent = '⏸ 暂停';
+  timer = setTimeout(tick, 150);
+}
+
+function stop() {
+  clearTimeout(timer);
+  timer = null;
+  $('play').textContent = '▶ 播放';
+}
+
+$('play').onclick = () => timer ? stop() : play();
+$('next').onclick = () => { stop(); go(cur + 1); };
+$('prev').onclick = () => { stop(); go(cur - 1); };
+$('reset').onclick = () => { stop(); go(0); };
+$('shuffle').onclick = () => setData(randomValues(+$('size').value));
+$('size').oninput = e => setData(randomValues(+e.target.value));
+$('speed').oninput = e => { $('speedOut').textContent = e.target.value; };
+
+$('apply').onclick = () => {
+  const parts = $('customInput').value.split(/[\s,，、]+/).filter(Boolean);
+  const vals = parts.map(Number);
+  if (vals.length < 2 || vals.length > 30 || !vals.every(v => Number.isInteger(v) && v > 0 && v <= 9999)) {
+    $('status').textContent = '请输入 2 到 30 个 1～9999 之间的正整数，用逗号或空格分隔。';
+    return;
+  }
+  $('size').value = Math.max(5, vals.length);
+  setData(vals);
+};
+$('customInput').addEventListener('keydown', e => { if (e.key === 'Enter') $('apply').click(); });
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); $('play').click(); }
+  else if (e.key === 'ArrowRight') $('next').click();
+  else if (e.key === 'ArrowLeft') $('prev').click();
+});
+
+window.addEventListener('resize', () => { layout(); render(); });
+
+setData(randomValues(10));
+</script>
+</body>
+</html>
