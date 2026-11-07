@@ -13,16 +13,16 @@ int main ()
     int max=1, min=1;
     for (int i=0;i<10;i++){
         scanf("%lf",&scores[i]);
-        if (scores[i]>max)
+        if (scores[i]>scores[max])
         {
-            max=scores[i];
+            max=i;
         }
-        if (scores[i]<min)
+        if (scores[i]<scores[min])
         {
-            min=scores[i];
+            min=i;
         }
         average+=scores[i];
     }
-    average=(average-max-min)/8;
+    average=(average-scores[max]-scores[min])/8;
     printf("%.2lf",average);
 }
