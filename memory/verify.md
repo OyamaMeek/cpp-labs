@@ -1,5 +1,11 @@
 # 完成标准
 
+## 洛谷 P5721
+
+- 先运行 `python3 -m pytest -q tests/test_luogu5721.py`，确认原程序数字跳号导致失败。
+- 修复后检查题目样例、全部 1 至 13 输入的行长度、连续数字、前导零及末尾换行；使用 C17 严格警告及 UndefinedBehaviorSanitizer 编译运行。
+- 运行全仓库 pytest 与 `git diff --check`，如实记录既有失败，保留用户已有暂存状态。
+
 ## 洛谷 P5707
 
 - 先运行 `python3 -m pytest -q tests/test_luogu5707.py`，确认原程序在样例上失败；修复后检查 12 组输入。
