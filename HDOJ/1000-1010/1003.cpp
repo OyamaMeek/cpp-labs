@@ -49,23 +49,25 @@ int main()
         int maxSum = a[1];
         int start = 1;
         int end = 1;
-        for(int j=1;j<=n;j++)
+        int sum = a[1];
+        int tempStart = 1;
+        for(int j=2;j<=n;j++)
         {
-                for(int k=j;k<=n;k++)
-                {
-                    int sum=0;
-                    for(int l=j;l<=k;l++)
-                    {
-                        sum=sum+a[l];
-                    }
-                    if(sum>maxSum)
-                    {
-                        maxSum=sum;
-                        start=j;
-                        end=k;
-                    }
-                }
-
+            if(sum<0)
+            {
+                sum=a[j];
+                tempStart=j;
+            }
+            else
+            {
+                sum=sum+a[j];
+            }
+            if(sum>maxSum)
+            {
+                maxSum=sum;
+                start=tempStart;
+                end=j;
+            }
         }
 
 
