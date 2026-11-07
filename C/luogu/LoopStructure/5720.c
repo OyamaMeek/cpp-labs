@@ -25,7 +25,7 @@ int main ()
     int a;
     scanf("%d",&a);
     int day=0;
-    while(a>1)
+    while(a>=1)
     {
         a/=2;
         day++;
