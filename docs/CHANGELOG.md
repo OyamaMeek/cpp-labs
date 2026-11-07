@@ -183,6 +183,6 @@
   - `HDOJ/1000-1010/1003.cpp`、`tests/test_hdoj1003.py`
   - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
 
-- **Git 提交**：待提交。
+- **Git 提交**：`3647634 fix: avoid cubic runtime in HDU 1003`，已普通推送至 `origin/main`；此提交信息通过后续文档提交保存。
 
 ---

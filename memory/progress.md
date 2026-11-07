@@ -34,5 +34,5 @@
 - [x] 添加真实程序回归测试；原代码通过 11 组样例和边界检查，在最大规模输入上触发 5 秒超时。
 - [x] 将三层循环替换为 O(N) 算法；11 组样例和边界检查、20 组每组 100000 个数的检查通过，AddressSanitizer/UndefinedBehaviorSanitizer 未报错。
 - [x] 全仓库 pytest 为 5 项通过、1 项失败：既有 `tests/test_hdoj1000.py::test_hdoj1000` 引用了不存在的 `HDOJ/1000.cpp`，属于本次范围外问题，未修改；`git diff --check` 通过。
-- [ ] 追加开发日志，检查差异，仅提交本次文件并普通推送至 `origin/main`。
+- [x] 开发日志及本次代码、测试和记录已提交为 `3647634 fix: avoid cubic runtime in HDU 1003`，已普通推送至 `origin/main`；本条提交信息通过后续文档提交保存。
 - 保留用户的 `HDOJ/1000-1010/1002.cpp` 修改和全部既有未跟踪文件；现有变长数组仍依赖编译器扩展。
