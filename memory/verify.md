@@ -1,5 +1,11 @@
 # 完成标准
 
+## 洛谷 P5707
+
+- 先运行 `python3 -m pytest -q tests/test_luogu5707.py`，确认原程序在样例上失败；修复后检查 12 组输入。
+- 使用 clang C17 严格警告和 UndefinedBehaviorSanitizer 编译、运行实际程序；运行全仓库 pytest，并如实记录既有失败。
+- 执行 `git diff --check`；保留其他用户修改及目标文件原有暂存内容。
+
 - 执行 `python3 -m pytest -q tests/test_character1_261024.py`：使用 clang C17、严格警告及 UndefinedBehaviorSanitizer 编译并运行真实目标文件。
 - 检查 12345 输出 15、零、单个数字、含零整数、负数、32 位整数两端边界、空输入和非数字输入。
 - 执行 `python3 -m pytest -q`，确认全部现有测试通过；原有测试文件包含用户修改，保留其内容。

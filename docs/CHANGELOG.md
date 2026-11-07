@@ -186,3 +186,22 @@
 - **Git 提交**：`3647634 fix: avoid cubic runtime in HDU 1003`，已普通推送至 `origin/main`；此提交信息通过后续文档提交保存。
 
 ---
+
+## [2026-11-07 16:31] 修复洛谷 P5707 出门时间计算
+
+- **需求/问题描述**：
+  > 根据题目截图修正 `C/luogu/SequentialStructure/5707.c`。
+
+- **实际实现的功能与改动**：
+  - 步行分钟数使用整数向上取整，加入垃圾分类 10 分钟；通过总分钟数计算出门时间，按一天取模处理跨午夜。
+  - 读取失败或非正整数输入返回 1；题目注释上限按截图补为 10^4。
+  - 修改前样例错误输出 `08:49`，修复后为 `07:48`；本题 12 组真实输入检查通过，覆盖整点、跨午夜、上限和读取失败，严格 C17 编译与 UndefinedBehaviorSanitizer 无异常。
+  - 全仓库 pytest 为 6 项通过、1 项既有失败：`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`；`git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/luogu/SequentialStructure/5707.c`、`tests/test_luogu5707.py`
+  - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：未提交或推送；目标文件暂存区只有创建注释，本次修复依赖用户未暂存的程序主体，无法独立提交完整程序，保留原暂存状态。
+
+---
