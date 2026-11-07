@@ -25,23 +25,48 @@
 //
 // Case 2:
 // 112233445566778899 + 998877665544332211 = 1111111111111111110
-
-
-#include <stdio.h>
 #include <iostream>
 using namespace std;
 
 int main()
 {
-   int num=0;
-   cin>>num;
-   for(int i=1;i<=num;i++)
-   {
-      long long a,b=0;
-      cin>>a>>b;
-      printf("%lld+%lld = %lld\n",a,b,a+b);
-   }
-
-
-
+    int a=0;
+    cin>>a;
+    for(int i=1;i<=a;i++)
+    {
+        string A,B;
+        cin>>A>>B;
+        int lenA=A.length();
+        int lenB=B.length();
+        int maxLen=max(lenA,lenB);
+        int sum[maxLen+1];
+        for(int j=0;j<=maxLen;j++)
+        {
+            sum[j]=0;
+        }
+        for(int j=0;j<lenA;j++)
+        {
+            sum[maxLen-j]+=A[lenA-1-j]-'0';
+        }
+        for(int j=0;j<lenB;j++)
+        {
+            sum[maxLen-j]+=B[lenB-1-j]-'0';
+        }
+        for(int j=maxLen;j>0;j--)
+        {
+            if(sum[j]>=10)
+            {
+                sum[j-1]+=sum[j]/10;
+                sum[j]=sum[j]%10;
+            }
+        }
+        cout<<"Case "<<i<<":"<<endl;
+        cout<<A<<" + "<<B<<" = ";
+        if(sum[0]!=0)
+            cout<<sum[0];
+        for(int j=1;j<=maxLen;j++)
+            cout<<sum[j];
+        cout<<endl;
+    }
+    return 0;
 }
