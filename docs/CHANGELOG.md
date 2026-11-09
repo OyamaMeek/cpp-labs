@@ -238,6 +238,6 @@
   - `C/luogu/LoopStructure/1009.c`、`tests/test_luogu1009.py`
   - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
 
-- **Git 提交**：待提交。
+- **Git 提交**：`2be6cdd fix: handle large factorial sums in P1009`，已普通推送至 `origin/main`；此提交信息通过后续文档提交保存。
 
 ---

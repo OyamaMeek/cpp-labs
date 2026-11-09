@@ -6,7 +6,7 @@
 - [x] 添加真实编译运行测试；原程序在 n=13 时由 UndefinedBehaviorSanitizer 报告有符号整数溢出。
 - [x] 改用十进制数组处理阶乘与求和进位；全部 1 至 50 输入与 Python 标准库计算结果一致，严格 C17 编译和 UndefinedBehaviorSanitizer 无异常。
 - [x] 全仓库 pytest：7 项通过、2 项失败；`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`，未修改的 `test_hdoj1003` 大输入检查超过 5 秒；范围外问题未改动。`git diff --check` 通过。
-- [ ] 开发日志已记录，待提交并普通推送。
+- [x] 修复、测试与开发记录已提交为 `2be6cdd fix: handle large factorial sums in P1009`，已普通推送至 `origin/main`；通过 GitHub 连接器核实远端为当前登录账号拥有的公开仓库。本条提交信息通过后续文档提交保存。
 
 ## 2026-11-07：洛谷 P5721
 
