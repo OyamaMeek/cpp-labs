@@ -1,5 +1,11 @@
 # 完成标准
 
+## 洛谷 P1009
+
+- 先运行 `python3 -m pytest -q tests/test_luogu1009.py`，确认原程序在 n=13 时发生有符号整数溢出。
+- 修复后以 C17 严格警告和 UndefinedBehaviorSanitizer 编译，逐一核对全部 1 至 50 的输入，包括题目样例和上限。
+- 运行全仓库 pytest，记录实际结果及既有失败；执行 `git diff --check`，检查提交范围后普通推送。
+
 ## 洛谷 P5721
 
 - 先运行 `python3 -m pytest -q tests/test_luogu5721.py`，确认原程序数字跳号导致失败。

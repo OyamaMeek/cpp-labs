@@ -223,3 +223,21 @@
 - **Git 提交**：未提交或推送；目标文件暂存区只有创建注释，修复依赖用户未暂存的程序主体，无法独立提交完整程序，保留原暂存状态。
 
 ---
+
+## [2026-11-09 19:17] 修复洛谷 P1009 阶乘之和溢出
+
+- **需求/问题描述**：
+  > 根据题目与两个 WA 测试点的截图检查并修正 `1009.c`。
+
+- **实际实现的功能与改动**：
+  - 用两个十进制数组分别保存阶乘和累加和，逐位处理乘法、加法进位，倒序输出有效数字；100 位容量覆盖题目 n≤50 的结果。
+  - 原程序在 n=13 时由 UndefinedBehaviorSanitizer 报告有符号整数溢出；修复后全部 1 至 50 输入与 Python 标准库阶乘求和一致，C17 严格警告编译及 UndefinedBehaviorSanitizer 检查通过。
+  - 全仓库 pytest：7 项通过、2 项失败；`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`，`test_hdoj1003` 大输入检查超过 5 秒。两项均不涉及本次修改，未处理；`git diff --check` 通过。未向洛谷重新提交。
+
+- **涉及文件**：
+  - `C/luogu/LoopStructure/1009.c`、`tests/test_luogu1009.py`
+  - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
