@@ -241,3 +241,22 @@
 - **Git 提交**：`2be6cdd fix: handle large factorial sums in P1009`，已普通推送至 `origin/main`；此提交信息通过后续文档提交保存。
 
 ---
+
+## [2026-11-11 14:33] 重写洛谷 P5723 质数口袋
+
+- **需求/问题描述**：
+  > 根据题目图片重写 `C/luogu/LoopStructure/5723.c`。
+
+- **实际实现的功能与改动**：
+  - 从 2 开始试除判断质数，装入前检查剩余承重，逐行输出装入的质数，最后输出数量；读取失败或非正数输入返回 1。
+  - 原程序在 L=100 时仅输出错误数量 10；重写后输出样例中的 9 个质数及数量 9。
+  - 14 组实际输入检查通过，包括承重边界、L=100000 和无效输入；C17 严格警告编译及 UndefinedBehaviorSanitizer 无异常。
+  - 全仓库 pytest：9 项通过、1 项既有失败，`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`；`git diff --check` 通过。未向洛谷提交。
+
+- **涉及文件**：
+  - `C/luogu/LoopStructure/5723.c`、`tests/test_luogu5723.py`
+  - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---
