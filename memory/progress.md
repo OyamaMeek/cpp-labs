@@ -6,7 +6,7 @@
 - [x] 新增测试在实现前因三个 C 文件缺失而全部失败。
 - [x] 完成三个独立程序；17 组真实运行检查通过，严格 C17 编译和 UndefinedBehaviorSanitizer 无异常。
 - [x] 全仓库 pytest 为 22 项通过、1 项既有失败：`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`；`git diff --check` 通过。
-- [ ] 开发日志已更新，待提交并普通推送。
+- [x] 实现、测试和开发日志已提交为 `b83af1a feat: complete assignments 19 through 21`，已普通推送至 `origin/main`；提交结果由后续文档提交保存。
 
 ## 2026-11-15：教材第 92 页勾选题
 

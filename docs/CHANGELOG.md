@@ -299,6 +299,6 @@
   - `tests/test_assignments_19_21.py`
   - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
 
-- **Git 提交**：待提交。
+- **Git 提交**：`b83af1a feat: complete assignments 19 through 21`，已普通推送至 `origin/main`；本条提交信息通过后续文档提交保存。
 
 ---
