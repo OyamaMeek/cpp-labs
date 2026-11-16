@@ -6,7 +6,7 @@
 - [x] 新增函数直接调用测试，实现前因 `is_prime` 未声明而编译失败。
 - [x] 提取函数；10 组函数断言与既有 17 组程序检查通过，严格 C17 编译及 UndefinedBehaviorSanitizer 无异常。
 - [x] 全仓库 pytest 为 23 项通过、1 项既有失败：`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`；`git diff --check` 通过。
-- [ ] 开发记录已更新，待提交并普通推送至 `origin/main`。
+- [x] 实现、测试和记录已提交为 `5ac29cf refactor: extract is_prime function in assignment 21`，已普通推送至 `origin/main`；提交信息通过后续文档提交保存。
 
 ## 2026-11-16：教材第 19、20、21 题
 
