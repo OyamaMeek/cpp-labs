@@ -1,5 +1,18 @@
 #include <stdio.h>
 
+int is_prime(long long number)
+{
+    if (number < 2) {
+        return 0;
+    }
+    for (long long divisor = 2; divisor <= number / divisor; divisor++) {
+        if (number % divisor == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int main(void)
 {
     int a, b;
@@ -15,14 +28,7 @@ int main(void)
     }
 
     for (long long number = a; number <= b; number++) {
-        int is_prime = number >= 2;
-        for (int divisor = 2; divisor <= number / divisor; divisor++) {
-            if (number % divisor == 0) {
-                is_prime = 0;
-                break;
-            }
-        }
-        if (is_prime) {
+        if (is_prime(number)) {
             sum += number;
         }
     }

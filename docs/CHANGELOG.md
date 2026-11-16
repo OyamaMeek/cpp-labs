@@ -302,3 +302,21 @@
 - **Git 提交**：`b83af1a feat: complete assignments 19 through 21`，已普通推送至 `origin/main`；本条提交信息通过后续文档提交保存。
 
 ---
+
+## [2026-11-16 16:26] 定义 is_prime 函数
+
+- **需求/问题描述**：
+  > 在 `C/assignments/261115-92/21.c` 定义 `is_prime` 函数。
+
+- **实际实现的功能与改动**：
+  - 将素数试除逻辑提取为 `int is_prime(long long number)`，素数返回 1，其余返回 0，主循环调用函数进行判断。
+  - 新增函数测试在实现前因函数未声明而编译失败；实现后 10 组函数断言与既有 17 组程序检查通过，严格 C17 编译及 UndefinedBehaviorSanitizer 无异常。
+  - 全仓库 pytest 为 23 项通过、1 项既有失败：`test_hdoj1000` 引用不存在的 `HDOJ/1000.cpp`；`git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/assignments/261115-92/21.c`、`tests/test_assignments_19_21.py`
+  - `memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：待提交。
+
+---

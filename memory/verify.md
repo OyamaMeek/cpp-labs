@@ -1,5 +1,11 @@
 # 完成标准
 
+## 2026-11-16：提取 is_prime 函数
+
+- 函数测试直接编译并调用真实 `21.c`，覆盖负数、0、1、2、普通素数、合数、完全平方数及 int 上界。
+- 执行 `python3 -m pytest -q tests/test_assignments_19_21.py`，使用 C17 严格警告和 UndefinedBehaviorSanitizer 检查，确认原有 17 组程序行为不变。
+- 执行全仓库 pytest 并如实记录失败；`git diff --check` 检查差异，仅提交本次改动文件。
+
 ## 2026-11-16：教材第 19、20、21 题
 
 - 先运行 `python3 -m pytest -q tests/test_assignments_19_21.py`，确认三题文件缺失；实现后使用严格 C17 警告及 UndefinedBehaviorSanitizer 编译运行。
