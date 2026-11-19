@@ -32,10 +32,11 @@ int main(void)
         }else{
             day_sum+=28;
         }
-        break;
+
         case 1:
         day_sum+=day;
         break;
+        printf("%d\n", day_sum);
     }
 
 
