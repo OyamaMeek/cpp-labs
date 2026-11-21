@@ -11,8 +11,9 @@ int main (void)
         int temp=age_3;
         age_3=age_2;
         age_2=age_1;
-        age_1=big;
         big+=temp;
+        age_1=big;
+
         printf("%d\n",big);
     }
     return 0;
