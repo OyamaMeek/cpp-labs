@@ -320,3 +320,22 @@
 - **Git 提交**：`5ac29cf refactor: extract is_prime function in assignment 21`，已普通推送至 `origin/main`；提交信息通过后续文档提交保存。
 
 ---
+
+## [2026-11-21 08:59] 洛谷 P5727 崩溃排查与输入校验
+
+- **需求/问题描述**：
+  > `C/luogu/Arrays/5727.c` 运行后退出代码 139，收到 SIGSEGV。
+
+- **实际实现的功能与改动**：
+  - 保留用户已修改的 `while(num!=1)` 和 `a[120]`；补充读取结果与 1 至 100 范围校验，避免读取失败或非正数导致持续写入数组。
+  - 新增真实程序测试；修改前空输入触发下标 120 越界，修改后全部合法输入和五组无效输入通过，严格 C17 编译与 UndefinedBehaviorSanitizer 无异常。
+  - CLion 调试会话停在 `scanf`，断点无法绑定；已停止本次会话并清理代理断点。
+  - 全仓库 pytest：23 项通过、2 项范围外失败，`test_assignments_261115_92[7]` 输出为空，`test_hdoj1000` 引用缺失文件；`git diff --check` 通过。
+
+- **涉及文件**：
+  - `C/luogu/Arrays/5727.c`、`tests/test_luogu5727.py`
+  - `memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`
+
+- **Git 提交**：未提交或推送；目标文件仅创建注释已暂存，完整修复依赖用户未暂存的程序主体，保留原有暂存状态。
+
+---
