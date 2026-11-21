@@ -10,10 +10,19 @@ int main (void)
     //
     // }
     int i=0;
-    while (scanf("%d",&a[i]))
-    {
-        i++;
-        if (i >= 20) break;
+    int n=0;
+    scanf("%d",&n);
+    if (n<=20){
+        for (i=0;i<n;i++)
+        {
+            scanf("%d",&a[i]);
+        }
+    }
+    else{
+        for (i=0;i<20;i++)
+        {
+            scanf("%d",&a[i]);
+        }
     }
     int min=0;
     for (int j=0;j<i;j++)
